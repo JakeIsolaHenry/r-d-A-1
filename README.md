@@ -1160,3 +1160,125 @@
             </div>
         </div>
     </div>
+  <div class="footer">
+        <h2>Multiple Paths to Monetization</h2>
+        <p>System1 provides flexible content monetization solutions for every creator</p>
+    </div>
+
+    <script>
+        function animatePhones(tabId) {
+            const section = document.getElementById(tabId);
+            if (!section) return;
+            
+            const phone1 = section.querySelector('.phone1');
+            const phone2 = section.querySelector('.phone2');
+            const phone3 = section.querySelector('.phone3');
+            const arrow1 = section.querySelector('.arrow1');
+            const arrow2 = section.querySelector('.arrow2');
+            
+            // Reset all animations
+            [phone1, phone2, phone3, arrow1, arrow2].forEach(el => {
+                if (el) el.classList.remove('visible');
+            });
+            
+            // Animate in sequence
+            setTimeout(() => phone1?.classList.add('visible'), 200);
+            setTimeout(() => arrow1?.classList.add('visible'), 1000);
+            setTimeout(() => phone2?.classList.add('visible'), 1000);
+            setTimeout(() => arrow2?.classList.add('visible'), 1800);
+            setTimeout(() => phone3?.classList.add('visible'), 1800);
+        }
+
+        function animateSolarPhones() {
+            const solarPhone1 = document.querySelector('.phone1-solar');
+            const solarPhone2 = document.querySelector('.phone2-solar');
+            const solarPhone3 = document.querySelector('.phone3-solar');
+            const solarArrow1 = document.querySelector('.solar-flow-section .arrow1');
+            const solarArrow2 = document.querySelector('.solar-flow-section .arrow2');
+            
+            // Reset all animations
+            [solarPhone1, solarPhone2, solarPhone3, solarArrow1, solarArrow2].forEach(el => {
+                if (el) el.classList.remove('visible');
+            });
+            
+            // Animate in sequence
+            setTimeout(() => solarPhone1?.classList.add('visible'), 200);
+            setTimeout(() => solarArrow1?.classList.add('visible'), 1000);
+            setTimeout(() => solarPhone2?.classList.add('visible'), 1000);
+            setTimeout(() => solarArrow2?.classList.add('visible'), 1800);
+            setTimeout(() => solarPhone3?.classList.add('visible'), 1800);
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.flow-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo(0, 0);
+            
+            // Start animation for the new tab
+            setTimeout(() => animatePhones(tabId), 100);
+        }
+
+        // Trigger animation on page load for active tab
+        document.addEventListener('DOMContentLoaded', () => {
+            animatePhones('linktree1');
+        });
+
+        // Trigger solar animation when scrolled into view
+        let solarAnimated = false;
+        window.addEventListener('scroll', () => {
+            if (solarAnimated) return;
+            
+            const solarSection = document.querySelector('.solar-flow-section');
+            if (solarSection) {
+                const rect = solarSection.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    solarAnimated = true;
+                    animateSolarPhones();
+                }
+            }
+        });
+
+        function showSolarSocial() {
+            document.getElementById('solar-social').style.display = 'block';
+            document.getElementById('solar-thankyou').style.display = 'none';
+            document.getElementById('solar-disqualify').style.display = 'none';
+            document.getElementById('solar-linktree').style.display = 'none';
+            const buttons = document.querySelectorAll('.solar-toggle-container .toggle-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttons[0].classList.add('active');
+        }
+
+        function showSolarThankYou() {
+            document.getElementById('solar-social').style.display = 'none';
+            document.getElementById('solar-thankyou').style.display = 'block';
+            document.getElementById('solar-disqualify').style.display = 'none';
+            document.getElementById('solar-linktree').style.display = 'none';
+            const buttons = document.querySelectorAll('.solar-toggle-container .toggle-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttons[1].classList.add('active');
+        }
+
+        function showSolarDisqualify() {
+            document.getElementById('solar-social').style.display = 'none';
+            document.getElementById('solar-thankyou').style.display = 'none';
+            document.getElementById('solar-disqualify').style.display = 'flex';
+            document.getElementById('solar-linktree').style.display = 'none';
+            const buttons = document.querySelectorAll('.solar-toggle-container .toggle-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttons[2].classList.add('active');
+        }
+
+        function showSolarLinktree() {
+            document.getElementById('solar-social').style.display = 'none';
+            document.getElementById('solar-thankyou').style.display = 'none';
+            document.getElementById('solar-disqualify').style.display = 'none';
+            document.getElementById('solar-linktree').style.display = 'block';
+            const buttons = document.querySelectorAll('.solar-toggle-container .toggle-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttons[3].classList.add('active');
+        }
+    </script>
+</body>
+</html>
